@@ -35,7 +35,7 @@ public class AddActivity extends AppCompatActivity {
             String address = addressIn.getText().toString();
             boolean isChecked = checked.isChecked();
 
-            Students s = new Students(name, id, "", isChecked);
+            Students s = new Students(name, id, "", isChecked, phone, address);
             Model.instance().getallStudents().add(s);
 
             finish();

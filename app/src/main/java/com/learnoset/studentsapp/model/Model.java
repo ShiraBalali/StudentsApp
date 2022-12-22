@@ -11,7 +11,7 @@ public class Model {
     }
     private Model(){
         for(int i=0; i<5; i++){
-            addStudent(new Students("name " + i,"" + i,"",false));
+            addStudent(new Students("name " + i,"" + i,"",false, "", ""));
         }
     }
 

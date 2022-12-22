@@ -28,6 +28,17 @@ public class StudentsRecyclerList extends AppCompatActivity {
     FloatingActionButton add_button;
 
     @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if(hasFocus)
+        {
+            data = Model.instance().getallStudents();
+            adapter.notifyDataSetChanged();
+        }
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_students_recycler_list);
@@ -54,8 +65,6 @@ public class StudentsRecyclerList extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(StudentsRecyclerList.this, AddActivity.class);
                 startActivity(intent);
-
-                Log.d("DD", "DD");
             }
         });
 
@@ -81,8 +90,9 @@ public class StudentsRecyclerList extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     int pos = getAdapterPosition();
-                    //TODO:
-                    //listener.onItemClick(pos);
+                    Intent intent = new Intent(StudentsRecyclerList.this, InfoActivity.class);
+                    intent.putExtra("pos", pos);
+                    startActivity(intent);
                 }
             });
         }
@@ -92,7 +102,6 @@ public class StudentsRecyclerList extends AppCompatActivity {
             idTv.setText(st.id);
             cb.setChecked(st.cb);
             cb.setTag(pos);
-
         }
     }
 
@@ -102,7 +111,7 @@ public class StudentsRecyclerList extends AppCompatActivity {
     class StudentsRecyclerAdapter extends RecyclerView.Adapter<StudentsViewHolder>{
         OnItemClickListener listener;
         void setOnItemClickListener(OnItemClickListener listener){
-            this.listener = this.listener;
+            this.listener = listener;
         }
 
         @NonNull
