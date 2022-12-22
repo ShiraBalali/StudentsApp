@@ -7,6 +7,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.learnoset.studentsapp.model.Model;
+import com.learnoset.studentsapp.model.Students;
+
+import java.util.List;
+
 public class AddActivity extends AppCompatActivity {
     EditText nameIn, idIn, phoneIn, addressIn;
     Button saveBtn, cancelBtn;
@@ -28,8 +33,12 @@ public class AddActivity extends AppCompatActivity {
             String id = idIn.getText().toString();
             String phone = phoneIn.getText().toString();
             String address = addressIn.getText().toString();
+            boolean isChecked = checked.isChecked();
 
+            Students s = new Students(name, id, "", isChecked);
+            Model.instance().getallStudents().add(s);
 
+            finish();
         });
 
         cancelBtn.setOnClickListener(view -> finish());

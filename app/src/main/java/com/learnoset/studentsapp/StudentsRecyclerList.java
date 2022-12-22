@@ -21,6 +21,7 @@ import java.util.List;
 
 public class StudentsRecyclerList extends AppCompatActivity {
     List<Students> data;
+    StudentsRecyclerAdapter adapter;
     TextView nameTv;
     TextView idTv;
     CheckBox cb;
@@ -31,20 +32,33 @@ public class StudentsRecyclerList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_students_recycler_list);
 
-        data  = Model.instance().getallStudents();
         RecyclerView list = findViewById(R.id.studentsrecycler_list);
         list.setHasFixedSize(true);
 
         list.setLayoutManager(new LinearLayoutManager(this));
-        StudentsRecyclerAdapter adapter = new StudentsRecyclerAdapter();
-        list.setAdapter(new StudentsRecyclerAdapter());
+        adapter = new StudentsRecyclerAdapter();
+        list.setAdapter(adapter);
+
+        data = Model.instance().getallStudents();
 
         adapter.setOnItemClickListener(new OnItemClickListener(){
             @Override
             public void onItemClick(int pos){
-               Log.d("TAG", "Row was clicked" + pos);
+                Log.d("TAG", "Row was clicked" + pos);
             }
         });
+
+        add_button = findViewById(R.id.add_button);
+        add_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StudentsRecyclerList.this, AddActivity.class);
+                startActivity(intent);
+
+                Log.d("DD", "DD");
+            }
+        });
+
     }
 
     class StudentsViewHolder extends RecyclerView.ViewHolder{
@@ -67,7 +81,8 @@ public class StudentsRecyclerList extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     int pos = getAdapterPosition();
-                    listener.onItemClick(pos);
+                    //TODO:
+                    //listener.onItemClick(pos);
                 }
             });
         }

@@ -10,7 +10,7 @@ public class Model {
         return _instance;
     }
     private Model(){
-        for(int i=0; i<20; i++){
+        for(int i=0; i<5; i++){
             addStudent(new Students("name " + i,"" + i,"",false));
         }
     }
@@ -22,5 +22,9 @@ public class Model {
 
     public void addStudent(Students st){
         data.add(st);
+    }
+
+    public void removeStudent(int index){
+        data.remove(index);
     }
 }
